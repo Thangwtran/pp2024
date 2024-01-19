@@ -5,9 +5,6 @@ class Student:
         self.id = id
         self.dob = dob
         self.course = course
-    
-    def inputNumOfStd(self,numOfStd): # class method ?
-        self.numOfStd = numOfStd
         
     def showStudent(self):
         print("Name: " + self.name)
@@ -39,8 +36,34 @@ class Student:
     def setCourse(self,course):
         self.course = course
    
-
-
+class Course:
+    def __init__(self,courseId,courseName,numOfStd):
+        self.courseId = courseId
+        self.courseName = courseName
+        self.numOfStudent = numOfStd
+    
+    
+    def showCourse(self):
+        print("CourseId: " + self.courseId)
+        print("CourseName: " + self.courseName)
+        print("Number of student in course: " + self.numOfStudent)
+    
+    def inputMark(self,registeredCourse,studentName):
+        if(self.courseName == registeredCourse):
+            mark = input("Enter mark for student: ")
+        print("Student's name: " + studentName)
+        print("Register Course: " + registeredCourse)
+        print("Mark: " + mark)
+    
+    # getter setter
+    def getCourseId(self):
+        return self.courseId
+    def setCourseId(self,courseId):
+        self.courseId = courseId
+    def getCourseName(self):
+        return self.courseName
+    def setCourseName(self,courseName):
+        self.courseName = courseName
 # Listing Functions
 
 ## List Courses
@@ -69,10 +92,11 @@ def showMarks(marks,courses,students):
         
 # Main
 print("Test Class")
-student1 = Student("22bi14","Nam","30/09/2004","OOP")
-print(student1.name)
-print(student1.getName())
-print(student1.getCourse())
-student1.setCourse("Ads")
-print(student1.getCourse())
+student1 = Student("22BI13404","Thang","30/09/2004","Ads")
 student1.showStudent()
+print()
+course1 = Course("01","Ads","20")
+course1.showCourse()
+print()
+print("==> Enter mark for student <==")
+course1.inputMark(student1.getCourse(),student1.getName())
