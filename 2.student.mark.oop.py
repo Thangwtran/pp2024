@@ -64,39 +64,45 @@ class Course:
         return self.courseName
     def setCourseName(self,courseName):
         self.courseName = courseName
+        
 # Listing Functions
 
 ## List Courses
-def showCourses(courses):
+def listCourse(courses):
     for course in courses:
-        print("ID: ",course['id'])
-        print("Name: ",course['name'])
+        print("ID: ",course.getCourseId())
+        print("Name: ",course.getCourseName())
         print("-----------------------------")
-def showStudents(students):
-    for student in students:
-        print("ID: ",student['id'])
-        print("Name: ",student['name'])
-        print("Date of birth: ", student['Dob'])
-        print("----------------------------")
 
-def showMarks(marks,courses,students):
-    for course in courses:
-        print(f"==> Marks for students in course {course['name']} <==")
-        course_marks = marks.get(course['id'], [])
-        for mark in course_marks:
-            student = next((s for s in students if s['id'] == mark['studentId']), None)
-            if student:
-                print(f"{student['name']}: {mark['mark']}")
-        print("-----------------------------")
+def listStudent(students):
+    for std in students:
+        print("Id: " + std.getId())
+        print("Name: " + std.getName())
+        print("Date of Birth: " + std.getDob())
+        print("-------------------------------")
 
         
 # Main
+courses = []
+students = []
 print("Test Class")
 student1 = Student("22BI13404","Thang","30/09/2004","Ads")
 student1.showStudent()
 print()
 course1 = Course("01","Ads","20")
 course1.showCourse()
+print()
+print("==> List Course <==")
+course2 = Course("002","OOP","30")
+courses.append(course1)
+courses.append(course2)
+listCourse(courses)
+print("==> List Student <==")
+student2 = Student("22BI2065","Lan Anh","26/06/2004","OOP")
+students.append(student2)
+students.append(student1)
+listStudent(students)
+
 print()
 print("==> Enter mark for student <==")
 course1.inputMark(student1.getCourse(),student1.getName())
