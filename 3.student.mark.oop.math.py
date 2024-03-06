@@ -1,7 +1,8 @@
 import math
-# INPUT FUNCTION
+
+
 class Student:
-    def __init__(self,id,name,dob,course): 
+    def __init__(self,id,name,dob,course): # Constructor ??
         self.name = name
         self.id = id
         self.dob = dob
@@ -51,16 +52,18 @@ class Course:
     
     def inputMark(self,registeredCourse,studentName):
         if(self.courseName == registeredCourse):
-            mark = float(input("Enter " + self.courseName + " mark for " + studentName + ":"))
+            mark = float(input("Enter " + self.courseName + " mark for " + studentName + ": "))
             mark_rounded = math.floor(mark*10)/10 # Round down to 1 digit decimal
+        
+            print()
+            print("<== Enter Mark SuccessFull ==>")
             print("Student's name: " + studentName)
             print("Register Course: " + registeredCourse)
-            print("Mark: " + str(mark_rounded))
-            print("-----------------------------")
-        else:
-            print("Invalid course")
-            
-        
+            print("Mark: ", mark_rounded)
+            print()
+        else: 
+            print("==> Does not find the course <==")
+    
     
     # getter setter
     def getCourseId(self):
@@ -92,30 +95,42 @@ def listStudent(students):
 # Main
 courses = []
 students = []
-print("Test Class")
-student1 = Student("22BI13404","Thang","30/09/2004","Ads")
-student1.showStudent()
-print()
-#########
-print("<-- Test Show Course -->")
-course1 = Course("01","Ads","20")
-course1.showCourse()
-print()
-######
-print("==> List Course <==")
-course2 = Course("002","OOP","30")
-courses.append(course1)
-courses.append(course2)
-listCourse(courses)
-print("==> List Student <==")
-student2 = Student("22BI2065","Lan Anh","26/06/2004","OOP")
-students.append(student2)
-students.append(student1)
-listStudent(students)
-print()
-#######
-print("==> Enter mark for student <==")
-course1.inputMark(student1.getCourse(),student1.getName())
-course2.inputMark(student2.getCourse(),student2.getName())
-
+while True:
+    print("1. Add course")
+    print("2. Add student")
+    print("3. List students")
+    print("4. List courses")
+    print("5. Enter mark for student")
+    print("6. Exit")
+    choice = input("Enter your choice: ")
+    if choice == '1':
+        courseId = input("Enter course id: ")
+        courseName = input("Enter course name: ")
+        numOfStd = input("Enter number of students: ")
+        course = Course(courseId, courseName, numOfStd)
+        courses.append(course)
+    elif choice == '2':
+        id = input("Enter student id: ")
+        name = input("Enter student name: ")
+        dob = input("Enter student date of birth: ")
+        course = input("Enter student course: ")
+        student = Student(id, name, dob, course)
+        students.append(student)
+    elif choice == '3':
+        listStudent(students)
+    elif choice == '4':
+        listCourse(courses)
+    elif choice == '5':
+        registeredCourse = input("Enter registered course: ")
+        studentName = input("Enter student name: ")
+        for student in students:
+            if student.getName() == studentName:
+                for course in courses:
+                    course.inputMark(registeredCourse, studentName)
+            else:
+                print("Does not find student name: " + studentName)
+    elif choice == '6':
+        break
+    else:
+            print("Invalid choice. Please enter a number between 1 and 6.")
 
