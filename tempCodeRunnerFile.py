@@ -1,1 +1,0 @@
-course1.inputMark(student1.getCourse(),student1.getName())
